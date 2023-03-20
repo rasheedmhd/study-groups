@@ -3,14 +3,12 @@
 #![allow(unused_assignments)]
 #[derive(Debug)]
 
-
 pub struct Card {
     pub number: i64,
     pub suit: i64,
 }
 
 fn main() {
-
     let s1: String = String::from("Hello World");
     let s1 = String::from("Hello World");
     let s2 = 17;
@@ -20,10 +18,7 @@ fn main() {
 
     // Taking and returning ownership
     // this is an anti-pattern if we don't want the ownership, then we shouldn't take printlnfn main() {
-    let mut ace_of_spades = Card {
-        number: 1,
-        suit: 1,
-    };
+    let mut ace_of_spades = Card { number: 1, suit: 1 };
 
     ace_of_spades = print_card(ace_of_spades);
 
@@ -66,11 +61,38 @@ fn main() {
 
     let x = 5;
     let y = x.clone();
-    println!("x: {} and y: {}", x,y);
+    println!("x: {} and y: {}", x, y);
 
     give_ownership(); //
 
     //println!("give ownership: {}", give_ownership());
+
+    // MOVES AND CONTROL FLOW
+    let seed = String::from("acorn");
+    if seed == "peach" {
+        // vu(seed) // seed is moved
+        vu(&seed);
+    } else {
+        // vuv(seed); // therefore can't be used here
+        vuv(&seed)
+    }
+
+    vuvu(&seed);
+}
+
+// fn vu(x: String)
+fn vu(x: &String) {
+    println!("{:#?} vu", x);
+}
+
+// fn vuv(x: String)
+fn vuv(x: &String) {
+    println!("{:#?} vuv", x);
+}
+
+// fn vuvu(x: String)
+fn vuvu(x: &String) {
+    println!("{:#?} vuvu", x);
 }
 
 // we can have data that we are sharing with others in rust
@@ -124,16 +146,16 @@ fn main() {
 
 // Shallow copy vrs Deep Copy
 
-fn give_ownership() -> String {             // give_ownership will move its
+fn give_ownership() -> String {
+    // give_ownership will move its
     // return value into the function
     // that calls it
 
     let some_string = String::from("yours"); // some_string comes into scope
 
-    some_string                              // some_string is returned and
-    // moves out to the calling
-    // function
+    some_string // some_string is returned and
+                // moves out to the calling
+                // function
 }
-
 
 // When we call give_ownership(), what happens to the returned value?
