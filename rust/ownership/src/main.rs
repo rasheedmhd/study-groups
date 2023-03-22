@@ -78,6 +78,33 @@ fn main() {
     }
 
     vuvu(&seed);
+
+    // COPY TYPES
+    // user defined types such as Structs and Enums are not copy types.
+    #[derive(Copy, Clone)]
+    struct Size {
+        number: u64,
+    }
+    let polo_tee = Size { number: 39 };
+    fn shirt_size(size: Size) {
+        println!("Your shirt's size is: {}", size.number)
+    }
+    shirt_size(polo_tee); // move happens here
+
+    let puma_tee = polo_tee; // cannot compile
+
+    // but if we break down struct Size {}, we realize that it is a number which has the Copy trait
+    // so why doesn't it compile?
+
+    // Because by default, Rust's user defined data are non-Copy
+    // But if all the fields are implement's the Copy Trait, we can use derive
+    // to make the type Copy [ check line 84 ]
+
+    // BUT WHY THOUGH?
+    // Having default non-Copy provides us with an explicit opt-in method when we have types
+    // that are all Copy which is more convenient since most of the times, our types
+    // don't contain all-Copy fields
+    // Copy types are restrictive on the types that you can use compared to non-Copy.
 }
 
 // fn vu(x: String)
@@ -95,9 +122,9 @@ fn vuvu(x: &String) {
     println!("{:#?} vuvu", x);
 }
 
-// we can have data that we are sharing with others in rust
-// because we are sharing with others, (&) we cannot change
-// that data(this prevents data races) but we can make a copy
+// Rust allows us to have shared data
+// When we share data with others(&), we cannot change
+// the data(this prevents data races) but we can make a copy
 // of the data and change parts of it or all of it.
 
 //fn create_next_card(card: &Card) -> Card {
@@ -125,7 +152,7 @@ fn vuvu(x: &String) {
 //    ..2: each data has only one owner
 //    ..3: when the data gets out of scope, it is dropped
 
-// what is a scope
+// SCOPE
 // why does rust has string literals/str/string slices and Strings
 // defined in the std lib
 
