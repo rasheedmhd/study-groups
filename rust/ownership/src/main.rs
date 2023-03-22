@@ -105,6 +105,24 @@ fn main() {
     // that are all Copy which is more convenient since most of the times, our types
     // don't contain all-Copy fields
     // Copy types are restrictive on the types that you can use compared to non-Copy.
+
+    // Rc and Arc: Shared Ownership
+    // Rc - Reference Count [ faster no-thread safe code]
+    // Arc - Atomic Reference Count [ for safe sharing among threads ]
+    use std::rc::Rc;
+    let s: Rc<String> = Rc::new("baki".to_string());
+    let t: Rc<String> = s.clone();
+    let u: Rc<String> = s.clone();
+
+    // Rc<String> creates a fixed sized data containing
+    //  1. reference
+    //  2. pointer
+    //  3. capacity
+    //  4. lenght.
+    // Rc<String> is basically a string with an additional data item called the reference
+    // which is incremented when we call .clone()
+    // .clone() then copies the data contained in the heap and assigns it to the new variable created.
+    // A value owned by an Rc pointer is immutable
 }
 
 // fn vu(x: String)
