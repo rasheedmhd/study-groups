@@ -123,6 +123,19 @@ fn main() {
     // which is incremented when we call .clone()
     // .clone() then copies the data contained in the heap and assigns it to the new variable created.
     // A value owned by an Rc pointer is immutable
+
+    // SLICES
+
+    // breaking string slices
+    let chopsticks = "こんにちは";
+
+    fn cutima(chopsticks: &str) -> &str {
+        let chop: = &[..3];
+        print("chopsticks slice: {}", chop)
+    }
+
+    cutima(chopsticks);
+
 }
 
 // fn vu(x: String)
