@@ -1,0 +1,1 @@
+/Users/Starlet/Dev/study-groups/rust/structs/carbohydrate/target/debug/libcarbohydrate.rlib: /Users/Starlet/Dev/study-groups/rust/structs/carbohydrate/src/lib.rs /Users/Starlet/Dev/study-groups/rust/structs/carbohydrate/src/monosaccharide.rs
