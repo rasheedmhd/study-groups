@@ -11,5 +11,5 @@ fn main() {
     println!("{:?}", toLog);
 
     // writeToFile(toLog);
-    fs::write("logged.txt", b"hello from sherif");
+    fs::write("logs.txt", b"hello from black sherif");
 }
