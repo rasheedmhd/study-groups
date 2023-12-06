@@ -3,9 +3,11 @@ use std::fs::File;
 use std::io::Write;
 use std::process;
 
+use winston::loglevel::LogLevel;
+
 #[derive(Debug)]
 struct Data {
-    data: String,
+    data: String, // owned type
 }
 
 impl Data {
@@ -17,7 +19,6 @@ impl Data {
         Ok( Data { data: to_log } )
     }
 }
-
 
 fn main() {
 
@@ -36,4 +37,5 @@ fn main() {
     // writeToFile(toLog);
     //    fs::write("logs.txt", b"hello from black sherif");
     logs_file.write(toLog.data.as_bytes()).expect("write failed");
+    println!("LogLevel {:#?}", LogLevel::Emergency);
 }
