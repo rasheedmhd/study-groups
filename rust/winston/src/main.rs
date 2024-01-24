@@ -4,7 +4,7 @@ use std::io::Write;
 use std::process;
 
 use winston::loglevel::LogLevel;
-
+    
 #[derive(Debug)]
 struct Data {
     data: String, // owned type
