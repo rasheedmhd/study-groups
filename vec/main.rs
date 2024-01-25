@@ -6,6 +6,7 @@
 // and of course non nullable ptr
 use std::ptr::NonNull;
 use std::marker::PhantomData;
+use std::alloc::{self, Layout}
 
 use std::mem;
 
@@ -33,6 +34,24 @@ impl<T> Vec<T> {
             ptr: NonNull::dangling(),
             len: 0,
             cap: 0,
+        }
+    }
+
+    fn grow(&mut self) {
+        let (new_cap, new_length) if cap.len == 0 {
+            (1, Layout::array::<T>(1).unwrap())
+        } else {
+            let new_cap = 2 * self.cap;
+            let new_layout = Layout::array::<T>(new_cap).unwrap();
+            (new_cap, new_layout)
+        }
+
+        assert!(new_layout.size() <= isize::MAX as usize, "Allocation too large");
+
+        let new_ptr = if self.cap == 0 {
+            unsafe {
+                alloc::alloc(new_layout)
+            }
         }
     } 
 }
